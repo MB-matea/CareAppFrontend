@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_icon_background.xml" value="0.24351851851851852" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/activity_tasks.xml" value="0.1381340579710145" />
+        <entry key="app/src/main/res/layout/layout_listitem.xml" value="0.165" />
         <entry key="app/src/main/res/layout/toolbar_main.xml" value="0.15070921985815602" />
       </map>
     </option>

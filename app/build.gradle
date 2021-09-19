@@ -53,6 +53,8 @@ dependencies {
     implementation 'io.swagger:swagger-annotations:1.6.2'
     implementation 'org.apache.httpcomponents:httpcore:4.4.14'
     implementation 'org.apache.httpcomponents:httpmime:4.5.13'
+
+    implementation 'com.android.support:recyclerview-v7:30'
 }
 
 task generateApiModels(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
