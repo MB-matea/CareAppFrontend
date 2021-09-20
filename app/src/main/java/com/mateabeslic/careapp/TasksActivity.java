@@ -26,6 +26,7 @@ import java.util.concurrent.TimeoutException;
 
 public class TasksActivity extends AppCompatActivity {
 
+    private static ResidentsApi client;
 
     private static final String TAG = "TasksActivity";
     //var
@@ -37,7 +38,28 @@ public class TasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
-        
+
+        if(client == null) {
+            client = new ResidentsApi();
+        }
+
+        client.setBasePath("http://192.168.1.4:8080");
+
+        client.residentsGet(new Response.Listener<GetAllResidentsResponseBody>() {
+            @Override
+            public void onResponse(GetAllResidentsResponseBody response) {
+                List<GetAllResidentsResponseBodyResidents> residents = response.getResidents();
+                Toast.makeText(TasksActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse: U erroru smo");
+                error.printStackTrace();
+            }
+        });
+
+
         initData();
     }
 
