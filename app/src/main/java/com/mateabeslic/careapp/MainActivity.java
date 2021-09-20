@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 String username = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
 
-                client.setBasePath("http://192.168.1.7:8080");
+                client.setBasePath("http://192.168.1.4:8080");
                 LoginRequestBody requestBody = new LoginRequestBody();
                 requestBody.setUserName(username);
                 requestBody.setPassword(password);

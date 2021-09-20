@@ -2,14 +2,30 @@ package com.mateabeslic.careapp;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.mateabeslic.careapp.api.client.LogInApi;
+import com.mateabeslic.careapp.api.client.ResidentsApi;
+import com.mateabeslic.careapp.api.invoker.ApiException;
+import com.mateabeslic.careapp.api.model.GetAllResidentsResponseBody;
+import com.mateabeslic.careapp.api.model.GetAllResidentsResponseBodyResidents;
+import com.mateabeslic.careapp.api.model.LoginRequestBody;
+import com.mateabeslic.careapp.api.model.LoginResponseBody;
+import com.mateabeslic.careapp.api.model.Resident;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class TasksActivity extends AppCompatActivity {
+
 
     private static final String TAG = "TasksActivity";
     //var
@@ -26,6 +42,7 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     private void initData() {
+
         Log.d(TAG, "initData: initData");
         mRoomNumbers.add(1);
         mNames.add("Ivo Ivić");
