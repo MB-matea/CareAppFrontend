@@ -1,6 +1,7 @@
 package com.mateabeslic.careapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +21,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private ArrayList<Integer> mRoomNumbers;
     private ArrayList<String> mNames;
-    private ArrayList<Boolean> mCheckBoxes = new ArrayList<>();
+    private ArrayList<Boolean> mCheckBoxes;
+    private ArrayList<Integer> mIds;
     private Context mContext;
 
-    public RecyclerViewAdapter(Context mContext, ArrayList<Integer> mRoomNumbers, ArrayList<String> mNames, ArrayList<Boolean> mCheckBoxes) {
+    public RecyclerViewAdapter(Context mContext, ArrayList<Integer> mRoomNumbers, ArrayList<String> mNames, ArrayList<Boolean> mCheckBoxes, ArrayList<Integer> mIds) {
         this.mRoomNumbers = mRoomNumbers;
         this.mNames = mNames;
         this.mContext = mContext;
         this.mCheckBoxes = mCheckBoxes;
+        this.mIds = mIds;
     }
 
     @NonNull
@@ -51,6 +54,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on" + mNames.get(holder.getAdapterPosition()));
                 Toast.makeText(mContext, mNames.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, ResidentDetailsActivity.class);
+                intent.putExtra("residentId", mIds.get(holder.getAdapterPosition()));
+                mContext.startActivity(intent);
             }
         });
     }
