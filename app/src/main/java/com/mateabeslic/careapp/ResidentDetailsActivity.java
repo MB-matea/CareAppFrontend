@@ -32,6 +32,7 @@ import com.mateabeslic.careapp.api.model.TherapyPlan;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,6 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
     public static String idString;
 
     private  static ResidentsApi client;
-
 
     GeneralDataResidentsFragment generalDataResidentsFragment;
     ContactPersonResidentsFragment contactPersonResidentsFragment;
@@ -117,8 +117,10 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                                 sendDataContactPersonFragment(resident);
                                 break;
                             case 2:
+                                sendDataHealthConditionFragment(resident);
                                 break;
                             case 3:
+                                sendDataTherapyFragment(therapies);
                                 break;
                             case 4:
                                 break;
@@ -202,6 +204,71 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         bundle.putString("contactAddress", resident.getContactAddress());
 
         ContactPersonResidentsFragment fragment = new ContactPersonResidentsFragment();
+        fragment.setArguments(bundle);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void sendDataHealthConditionFragment(Resident resident) {
+
+        Bundle bundle = new Bundle();
+        String mobility = resident.getMobility().toString();
+        String independence = resident.getIndependence().toString();
+
+        switch (mobility){
+            case "MOBILE":
+                bundle.putString("mobility", "pokretan");
+                break;
+            case "IMMOBILE":
+                bundle.putString("mobility", "nepokretan");
+                break;
+        }
+
+        switch (independence){
+            case "INDEPENDENT":
+                bundle.putString("independence", "samostalan");
+                break;
+            case "NECESSARY_AID":
+                bundle.putString("independence", "potrebno pomagalo");
+                break;
+            case "COMPLETELY_DEPENDENT":
+                bundle.putString("independence", "potpuno ovisan");
+                break;
+        }
+
+        //bundle.putString("mobility", resident.getMobility().toString());
+        //bundle.putString("independence", resident.getIndependence().toString());
+        bundle.putString("note", resident.getNote());
+
+        HealthConditionResidentsFragment fragment = new HealthConditionResidentsFragment();
+        fragment.setArguments(bundle);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void sendDataTherapyFragment(List<Therapy> therapies) {
+
+        Bundle bundle = new Bundle();
+
+        ArrayList<String> therapyStringList = new ArrayList<>();
+
+        if(therapies.isEmpty()){
+            List<String> emptyList = new ArrayList<>();
+            therapyStringList.add("Nije dodana nijedna terapija.");
+        }else{
+            for(Therapy therapy : therapies){
+                String therapyString = therapy.toString();
+                therapyStringList.add(therapyString);
+            }
+        }
+
+        bundle.putStringArrayList("therapylist",therapyStringList);
+
+        TherapyResidentsFragment fragment = new TherapyResidentsFragment();
         fragment.setArguments(bundle);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
