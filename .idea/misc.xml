@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_lock_background.xml" value="0.18102564102564103" />
         <entry key="app/src/main/res/drawable/ic_plus_background.xml" value="0.18102564102564103" />
         <entry key="app/src/main/res/layout/activity_add_resident.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/activity_create_resident.xml" value="0.2183267242109071" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_resident_details.xml" value="0.16770833333333332" />

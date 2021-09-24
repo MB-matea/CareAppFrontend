@@ -161,7 +161,9 @@ public class ResidentsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_create_resident:
-                Toast.makeText(ResidentsActivity.this, "Create resident", Toast.LENGTH_LONG).show();
+                Toast.makeText(ResidentsActivity.this, "Create resident", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(ResidentsActivity.this, CreateResidentActivity.class);
+                startActivity(intent2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
