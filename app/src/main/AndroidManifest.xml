@@ -26,7 +26,10 @@
         <activity android:name=".ResidentsActivity"
             android:label="@string/residents"
             />
-        <activity android:name=".ResidentDetailsActivity"/>
+        <activity android:name=".ResidentDetailsActivity"
+            android:label=""/>
+        <activity android:name=".HomeActivity"
+            android:label=""/>
 
     </application>
 

@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Uspješno ste se prijavili!", Toast.LENGTH_LONG).show();
 
                         if(user.getIsAdmin().equals(true)){
-                            Intent intent = new Intent(MainActivity.this, ResidentsActivity.class);
+                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             intent.putExtra("userId", user.getUserId());
                             intent.putExtra("name", user.getName());
                             intent.putExtra("lastName", user.getLastName());
@@ -96,4 +96,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Disable back button
+    @Override
+    public void onBackPressed() {
+
+    }
 }

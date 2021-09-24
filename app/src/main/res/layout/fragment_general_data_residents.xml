@@ -15,107 +15,75 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Ime: "
+            android:text="Ime:   "
             android:textSize="20dp"/>
 
         <TextView
+            android:id="@+id/txt_last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Ime: "
+            android:text="Prezime:   "
             android:textSize="20dp"/>
 
         <TextView
+            android:id="@+id/txt_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Ime: "
+            android:text="Soba:   "
             android:textSize="20dp"/>
 
         <TextView
+            android:id="@+id/txt_oib"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Ime: "
+            android:text="OIB:   "
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/txt_date_of_birth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Ime: "
-            android:textSize="20dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="Ime: "
+            android:text="Datum rođenja:   "
             android:textSize="20dp"/>
 
         <TextView
+            android:id="@+id/txt_place_of_birth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Ime: "
+            android:text="Mjesto rođenja:   "
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/txt_nationality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Nacionalnost:   "
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/txt_citizenship"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Ime: "
+            android:text="Državljanstvo:   "
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/txt_id_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Ime: "
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="Ime: "
-            android:textSize="20dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="rererere: "
-            android:textSize="20dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="gdfgd: "
-            android:textSize="20dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="vfdgd: "
-            android:textSize="20dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="fdgsa: "
-            android:textSize="20dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="revfdbvd: "
+            android:text="Br. osobne iskaznice:   "
             android:textSize="20dp" />
 
     </LinearLayout>

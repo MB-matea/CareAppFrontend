@@ -45,10 +45,8 @@ public class ResidentsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Bundle bundle = getIntent().getExtras();
-        Integer userId = (Integer) bundle.get("userId");
-        String userName = (String) bundle.get("name");
-        String userLastName = (String) bundle.get("lastName");
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if(client == null) {
             client = new ResidentsApi();
@@ -79,8 +77,6 @@ public class ResidentsActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-
-
 
     }
 
@@ -157,8 +153,13 @@ public class ResidentsActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(ResidentsActivity.this, HomeActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.action_create_resident:
                 Toast.makeText(ResidentsActivity.this, "Create resident", Toast.LENGTH_LONG).show();
                 return true;

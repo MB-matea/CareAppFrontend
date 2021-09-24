@@ -9,10 +9,12 @@
         <entry key="app/src/main/res/drawable/ic_lock_background.xml" value="0.18102564102564103" />
         <entry key="app/src/main/res/drawable/ic_plus_background.xml" value="0.18102564102564103" />
         <entry key="app/src/main/res/layout/activity_add_resident.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_resident_details.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/activity_residents.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_tasks.xml" value="0.1381340579710145" />
+        <entry key="app/src/main/res/layout/fragment_contact_person_residents.xml" value="0.27309782608695654" />
         <entry key="app/src/main/res/layout/fragment_general_data_residents.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_general_details_resident.xml" value="0.1453804347826087" />
         <entry key="app/src/main/res/layout/layout_listitem.xml" value="0.165" />
