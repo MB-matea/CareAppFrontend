@@ -200,12 +200,20 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/txt_npte"
+                android:id="@+id/txt_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:text="Bilješka:   "
+                android:hint="Bilješka:   "
                 android:textSize="20dp"/>
+
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/theme1"
+                android:textColor="@color/white"
+                android:text="Dodaj"/>
 
 
         </LinearLayout>
