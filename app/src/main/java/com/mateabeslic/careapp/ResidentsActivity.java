@@ -1,7 +1,9 @@
 package com.mateabeslic.careapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,6 +51,19 @@ public class ResidentsActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Toast.makeText(ResidentsActivity.this, "u oncreate", Toast.LENGTH_SHORT).show();
+
+        getResidents();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
+    }
+
+
+    public void getResidents(){
         if(client == null) {
             client = new ResidentsApi();
         }
@@ -69,7 +85,6 @@ public class ResidentsActivity extends AppCompatActivity {
 
                 initRecyclerView();
 
-                //initData();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -77,62 +92,6 @@ public class ResidentsActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-
-    }
-
-    private void initData() {
-
-        Log.d(TAG, "initData: initData");
-        mRoomNumbers.add(1);
-        mNames.add("Ivo Ivić");
-        mCheckBoxes.add(true);
-
-        mRoomNumbers.add(2);
-        mNames.add("Marin Marić");
-        mCheckBoxes.add(false);
-
-        mRoomNumbers.add(3);
-        mNames.add("Ana Anić");
-        mCheckBoxes.add(false);
-
-        mRoomNumbers.add(4);
-        mNames.add("Toni Tonić");
-        mCheckBoxes.add(true);
-
-        mRoomNumbers.add(5);
-        mNames.add("Karla Karlić");
-        mCheckBoxes.add(true);
-
-        mRoomNumbers.add(6);
-        mNames.add("Anita Anić");
-        mCheckBoxes.add(false);
-        mRoomNumbers.add(1);
-        mNames.add("Ivo Ivić");
-        mCheckBoxes.add(true);
-
-        mRoomNumbers.add(2);
-        mNames.add("Marin Marić");
-        mCheckBoxes.add(false);
-
-        mRoomNumbers.add(3);
-        mNames.add("Ana Anić");
-        mCheckBoxes.add(false);
-
-        mRoomNumbers.add(4);
-        mNames.add("Toni Tonić");
-        mCheckBoxes.add(true);
-
-        mRoomNumbers.add(5);
-        mNames.add("Karla Karlić");
-        mCheckBoxes.add(true);
-
-        mRoomNumbers.add(6);
-        mNames.add("Anita Anić");
-        mCheckBoxes.add(false);
-
-        Log.d(TAG, "initData: test");
-
-        initRecyclerView();
     }
 
     private void initRecyclerView(){

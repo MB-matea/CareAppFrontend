@@ -14,9 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CareApp">
         <activity
+            android:name=".EditResidentActivity"
+            android:exported="true" />
+        <activity
             android:name=".CreateResidentActivity"
             android:exported="true"
-            android:label="Dodaj korisnika doma"/>
+            android:label="Dodaj korisnika doma" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">

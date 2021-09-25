@@ -40,14 +40,18 @@ import java.util.Locale;
 
 public class ResidentDetailsActivity extends AppCompatActivity  {
 
+
     private static final String TAG = "Date";
     Spinner spinner;
     public static String idString;
 
     private  static ResidentsApi client;
+    public Resident residentPublic = new Resident();
+    public List<Therapy> therapiesPublic = null;
 
     GeneralDataResidentsFragment generalDataResidentsFragment;
     ContactPersonResidentsFragment contactPersonResidentsFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +97,10 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
             public void onResponse(GetSpecificResidentResponseBody response) {
                 //Toast.makeText(ResidentDetailsActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                 Resident resident = response.getResident();
+                residentPublic = resident;
+
                 List<Therapy> therapies = response.getTherapies();
+                therapiesPublic = therapies;
                 List<TherapyPlan> therapyPlans = response.getTherapyPlans();
 
                 setTitle(resident.getName() + " " + resident.getLastName());
@@ -139,11 +146,13 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                 error.printStackTrace();
             }
         });
+
     }
 
-    public void setFragment (Fragment fragment, Resident resident){
-
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
     }
 
     @Override
@@ -163,6 +172,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                 startActivity(intent);
                 return true;
             case R.id.action_edit_resident:
+                callIntentEditResident(residentPublic, therapiesPublic);
                 Toast.makeText(ResidentDetailsActivity.this, "Edit Resident", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.action_delete_resident:
@@ -172,6 +182,8 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
     private void sendDataGeneralDataFragment(Resident resident) {
 
@@ -277,5 +289,73 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void callIntentEditResident(Resident resident, List<Therapy> therapies) {
+        Intent intent1 =  new Intent(ResidentDetailsActivity.this, EditResidentActivity.class);
+
+        //
+        intent1.putExtra("id", resident.getResidentId());
+        intent1.putExtra("name", resident.getName());
+        intent1.putExtra("lastName", resident.getLastName());
+        intent1.putExtra("room", resident.getRoom());
+        intent1.putExtra("oib", resident.getOib());
+        intent1.putExtra("nationality", resident.getNationality());
+        intent1.putExtra("citizenship", resident.getCitizenship());
+        intent1.putExtra("dateOfBirth", Helper.generateString(resident.getDateOfBirth()));
+        intent1.putExtra("placeOfBirth", resident.getPlaceOfBirth());
+        intent1.putExtra("idCard", resident.getIdCard());
+
+        //
+        intent1.putExtra("contactName", resident.getContactName());
+        intent1.putExtra("contactRelationship", resident.getContactRelationship());
+        intent1.putExtra("contactNumber", resident.getContactNumber());
+        intent1.putExtra("contactEmail", resident.getContactEmail());
+        intent1.putExtra("contactAddress", resident.getContactAddress());
+
+        //
+        String mobility = resident.getMobility().toString();
+        String independence = resident.getIndependence().toString();
+
+        switch (mobility){
+            case "MOBILE":
+                intent1.putExtra("mobility", "pokretan");
+                break;
+            case "IMMOBILE":
+                intent1.putExtra("mobility", "nepokretan");
+                break;
+        }
+
+        switch (independence) {
+            case "INDEPENDENT":
+                intent1.putExtra("independence", "samostalan");
+                break;
+            case "NECESSARY_AID":
+                intent1.putExtra("independence", "potrebno pomagalo");
+                break;
+            case "COMPLETELY_DEPENDENT":
+                intent1.putExtra("independence", "potpuno ovisan");
+                break;
+        }
+        intent1.putExtra("note", resident.getNote());
+
+        //
+        ArrayList<String> therapyStringList = new ArrayList<>();
+
+        if(therapies.isEmpty()){
+            List<String> emptyList = new ArrayList<>();
+            therapyStringList.add("Nije dodana nijedna terapija.");
+        }else{
+            for(Therapy therapy : therapies){
+                String therapyString = therapy.toString();
+                therapyStringList.add(therapyString);
+            }
+        }
+
+        intent1.putExtra("note", resident.getNote());
+
+        intent1.putStringArrayListExtra("therapy",therapyStringList);
+
+        startActivity(intent1);
     }
 }

@@ -13,7 +13,7 @@ public class Helper {
     }
 
     public static String generateString(Date date) {
-        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = myFormat.format(date);
         return dateString;
     }
