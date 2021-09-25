@@ -148,7 +148,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_details, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -162,8 +162,11 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                 Intent intent = new Intent(ResidentDetailsActivity.this, HomeActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.action_create_resident:
-                Toast.makeText(ResidentDetailsActivity.this, "Create resident", Toast.LENGTH_LONG).show();
+            case R.id.action_edit_resident:
+                Toast.makeText(ResidentDetailsActivity.this, "Edit Resident", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.action_delete_resident:
+                Toast.makeText(ResidentDetailsActivity.this, "Delete Resident", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
