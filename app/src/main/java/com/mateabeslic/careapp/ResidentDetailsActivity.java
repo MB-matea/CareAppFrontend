@@ -1,5 +1,7 @@
 package com.mateabeslic.careapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -155,6 +158,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         recreate();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_details, menu);
@@ -171,18 +175,65 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                 Intent intent = new Intent(ResidentDetailsActivity.this, HomeActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.action_task_resident:
+                Intent intent1 = new Intent(ResidentDetailsActivity.this, ResidentTasksActivity.class);
+                intent1.putExtra("residentId", residentPublic.getResidentId());
+                startActivity(intent1);
+                return true;
             case R.id.action_edit_resident:
                 callIntentEditResident(residentPublic, therapiesPublic);
                 Toast.makeText(ResidentDetailsActivity.this, "Edit Resident", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.action_delete_resident:
-                Toast.makeText(ResidentDetailsActivity.this, "Delete Resident", Toast.LENGTH_LONG).show();
+                //Toast.makeText(ResidentDetailsActivity.this, "Delete Resident", Toast.LENGTH_LONG).show();
+                showDeleteDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void showDeleteDialog() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(ResidentDetailsActivity.this);
+        builder1.setMessage("Jeste li sigurni da želite izbrisati korisnika?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "IZBRIŠI",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        deleteResident();
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "Odustani",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+    }
+
+    private void deleteResident() {
+        client.residentsResidentIdDelete(residentPublic.getResidentId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(ResidentDetailsActivity.this, "Korisnik je izbrisan!", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ResidentDetailsActivity.this, "GREŠKA!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
     private void sendDataGeneralDataFragment(Resident resident) {
