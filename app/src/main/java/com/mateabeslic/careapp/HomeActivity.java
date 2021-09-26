@@ -42,7 +42,8 @@ public class HomeActivity extends AppCompatActivity {
         btnUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Users", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeActivity.this, UsersActivity.class);
+                startActivity(intent);
             }
         });
 

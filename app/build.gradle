@@ -61,7 +61,7 @@ dependencies {
 
 task generateApiModels(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
     generatorName = "android"
-    inputSpec = "$rootDir/apiSpec/CareAppApiSpec_0.0.5.yaml"
+    inputSpec = "$rootDir/apiSpec/CareAppApiSpec_0.0.6.yaml"
     outputDir = "$buildDir/generated/openapi"
     groupId = "$project.group"
     id = "$project.name-openapi"

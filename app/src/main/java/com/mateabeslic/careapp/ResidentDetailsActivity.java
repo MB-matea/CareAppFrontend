@@ -94,7 +94,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
             client = new ResidentsApi();
         }
 
-        client.setBasePath("http://192.168.1.4:8080");
+        client.setBasePath(BasePath.basePath);
         client.residentsResidentIdGet(residentId, Helper.generateDate(2021,9, 23), new Response.Listener<GetSpecificResidentResponseBody>() {
             @Override
             public void onResponse(GetSpecificResidentResponseBody response) {

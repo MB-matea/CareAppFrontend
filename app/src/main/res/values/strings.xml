@@ -3,6 +3,7 @@
     <string name="residents">Korisnici doma</string>
     <string name="details">Detalji</string>
     <string name="add_resident">Dodaj korisnika doma</string>
+    <string name="base_path">192.168.1.14:8080</string>
     <string-array name="residents_info">
         <item>Opći podaci</item>
         <item>Kontakt osoba</item>
@@ -17,6 +18,10 @@
     <string-array name="mobility_status">
         <item>Pokretan</item>
         <item>Nepokretan</item>
+    </string-array>
+    <string-array name="admin_status">
+        <item>Da</item>
+        <item>Ne</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

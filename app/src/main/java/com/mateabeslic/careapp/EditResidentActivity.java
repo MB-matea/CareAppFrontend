@@ -207,7 +207,7 @@ public class EditResidentActivity extends AppCompatActivity {
             client = new ResidentsApi();
         }
 
-        client.setBasePath("http://192.168.1.4:8080");
+        client.setBasePath(BasePath.basePath);
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {

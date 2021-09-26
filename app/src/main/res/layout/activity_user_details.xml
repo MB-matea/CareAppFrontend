@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UserDetailsActivity"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_main"
+        android:id="@+id/toolbar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Osnovni podaci"
+        android:textSize="20dp"
+        android:textColor="@color/theme1"
+        android:textAlignment="center"
+        android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Ime:   "
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/txt_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Prezime:   "
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Email:   "
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/txt_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Adresa:   "
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/txt_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Broj:   "
+            android:textSize="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pristupni podaci"
+        android:textSize="20dp"
+        android:textColor="@color/theme1"
+        android:textAlignment="center"
+        android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/txt_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Korisničko ime:   "
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/txt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Lozinka:   "
+            android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/txt_is_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Administrator:   "
+        android:textSize="20dp" />
+
+
+</LinearLayout>

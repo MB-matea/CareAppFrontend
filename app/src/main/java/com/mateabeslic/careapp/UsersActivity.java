@@ -1,49 +1,44 @@
 package com.mateabeslic.careapp;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.mateabeslic.careapp.api.client.ResidentsApi;
+import com.mateabeslic.careapp.api.client.UsersApi;
 import com.mateabeslic.careapp.api.model.GetAllResidentsResponseBody;
 import com.mateabeslic.careapp.api.model.GetAllResidentsResponseBodyResidents;
+import com.mateabeslic.careapp.api.model.GetAllUsersResponseBody;
+import com.mateabeslic.careapp.api.model.GetAllUsersResponseBodyUsers;
 import com.mateabeslic.careapp.api.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResidentsActivity extends AppCompatActivity {
+public class UsersActivity extends AppCompatActivity {
 
-    private static ResidentsApi client;
+    private static UsersApi client;
 
-    private static final String TAG = "ResidentsActivity";
+    private static final String TAG = "UsersActivity";
     //var
-    private ArrayList<Integer> mRoomNumbers = new ArrayList<>();
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<Boolean> mCheckBoxes = new ArrayList<>();
     private ArrayList<Integer> mIds = new ArrayList<>();
+    private ArrayList<String> mNames = new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_residents);
+        setContentView(R.layout.activity_users);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,9 +46,9 @@ public class ResidentsActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Toast.makeText(ResidentsActivity.this, "u oncreate", Toast.LENGTH_SHORT).show();
+        Toast.makeText(UsersActivity.this, "u oncreate", Toast.LENGTH_SHORT).show();
 
-        getResidents();
+        getUsers();
     }
 
     @Override
@@ -63,43 +58,41 @@ public class ResidentsActivity extends AppCompatActivity {
     }
 
 
-    public void getResidents(){
+    public void getUsers(){
         if(client == null) {
-            client = new ResidentsApi();
+            client = new UsersApi();
         }
 
         client.setBasePath(BasePath.basePath);
 
-        client.residentsGet(new Response.Listener<GetAllResidentsResponseBody>() {
+        client.usersGet(new Response.Listener<GetAllUsersResponseBody>() {
             @Override
-            public void onResponse(GetAllResidentsResponseBody response) {
-                List<GetAllResidentsResponseBodyResidents> residents = response.getResidents();
+            public void onResponse(GetAllUsersResponseBody response) {
+                List<GetAllUsersResponseBodyUsers> users = response.getUsers();
 
-                for (GetAllResidentsResponseBodyResidents resident:residents) {
-                    mRoomNumbers.add(resident.getRoom());
-                    String name = resident.getName() + " " + resident.getLastName();
+                for (GetAllUsersResponseBodyUsers user : users) {
+                    mIds.add(user.getUserId());
+                    String name = user.getName() + " " + user.getLastName();
                     mNames.add(name);
-                    mCheckBoxes.add(false);
-                    mIds.add(resident.getResidentId());
                 }
 
                 initRecyclerView();
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+
             }
         });
+
     }
 
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: initrecyclerview");
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(ResidentsActivity.this, mRoomNumbers, mNames, mCheckBoxes, mIds);
+        RecyclerView recyclerView = findViewById(R.id.users_recycler_view);
+        UsersRecyclerViewAdapter adapter = new UsersRecyclerViewAdapter(UsersActivity.this, mIds, mNames);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ResidentsActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(UsersActivity.this));
 
     }
 
@@ -116,17 +109,16 @@ public class ResidentsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                Intent intent = new Intent(ResidentsActivity.this, HomeActivity.class);
+                Intent intent = new Intent(UsersActivity.this, HomeActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.action_create_resident:
-                Toast.makeText(ResidentsActivity.this, "Create resident", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(ResidentsActivity.this, CreateResidentActivity.class);
+                Toast.makeText(UsersActivity.this, "Create resident", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(UsersActivity.this, CreateUserActivity.class);
                 startActivity(intent2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

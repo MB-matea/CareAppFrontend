@@ -151,7 +151,7 @@ public class CreateResidentActivity extends AppCompatActivity {
         }
 
 
-        client.setBasePath("http://192.168.1.4:8080");
+        client.setBasePath(String.valueOf(R.string.base_path));
 
         CreateResidentRequestBody createResidentRequestBody = new CreateResidentRequestBody();
 
