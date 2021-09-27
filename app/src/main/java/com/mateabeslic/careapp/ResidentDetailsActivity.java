@@ -35,6 +35,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
     private  static ResidentsApi client;
     public Resident residentPublic = new Resident();
     public List<Therapy> therapiesPublic = null;
+    public String therapyString;
 
 
     @Override
@@ -297,11 +298,10 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         ArrayList<String> therapyStringList = new ArrayList<>();
 
         if(therapies.isEmpty()){
-            List<String> emptyList = new ArrayList<>();
             therapyStringList.add("Nije dodana nijedna terapija.");
         }else{
             for(Therapy therapy : therapies){
-                String therapyString = therapy.toString();
+                String therapyString = therapy.getName();
                 therapyStringList.add(therapyString);
             }
         }
