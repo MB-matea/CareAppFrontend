@@ -166,6 +166,9 @@ public class ResidentTasksActivity extends AppCompatActivity {
                     String name = user.getName() + " " + user.getLastName();
                     dUsers.add(name);
                 }
+
+                createDialogView(dUserIds, dUsers);
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -175,6 +178,9 @@ public class ResidentTasksActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void createDialogView(ArrayList<Integer> dUserIds, ArrayList<CharSequence> dUsers) {
         // CREATE DIALOG
         AlertDialog.Builder builder = new AlertDialog.Builder(ResidentTasksActivity.this);
         View dialogView = getLayoutInflater().inflate(R.layout.login_dialog_layout, null);
@@ -218,7 +224,7 @@ public class ResidentTasksActivity extends AppCompatActivity {
                 date = edtDate.getText().toString();
                 Integer position = spnUser.getSelectedItemPosition() + 1;
                 Log.d(TAG, "onClick: position" + position);
-                userId = dUserIds.get(position);
+                userId = (dUserIds.get(position-1));
                 addTask();
                 dialog.dismiss();
             }
@@ -236,7 +242,6 @@ public class ResidentTasksActivity extends AppCompatActivity {
         builder.setView(dialogView);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
     }
 
     private void addTask() {
