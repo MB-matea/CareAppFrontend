@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -26,6 +24,8 @@ public class HomeActivity extends AppCompatActivity {
         btnUsers = findViewById(R.id.btn_users);
         btnLogout = findViewById(R.id.btn_logout);
 
+
+        // KORISNICI DOMA
         btnResidents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +34,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
+        // DJELATNICI
         btnUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +44,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
+        // ODJAVA
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +54,5 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 }

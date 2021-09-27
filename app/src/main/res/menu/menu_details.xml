@@ -4,7 +4,7 @@
 
     <item android:id="@+id/action_task_resident"
         android:title="Raspored"
-        android:icon="@mipmap/ic_list2_foreground"
+        android:icon="@mipmap/ic_tasks_foreground"
         android:orderInCategory="1"
         app:showAsAction="ifRoom" />
 

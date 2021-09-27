@@ -43,8 +43,6 @@ import java.util.Locale;
 
 public class ResidentDetailsActivity extends AppCompatActivity  {
 
-
-    private static final String TAG = "Date";
     Spinner spinner;
     public static String idString;
 
@@ -64,7 +62,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_home3_foreground);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinner = findViewById(R.id.spinner);
@@ -77,44 +75,36 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         idString = String.valueOf(residentId);
 
 
-        //Toast.makeText(ResidentDetailsActivity.this, residentId.toString(), Toast.LENGTH_LONG).show();
+        // DATE parameter -> residentResidentIdGet
+        Date date = new Date();
+        String dateString = Helper.generateString(date);
+        String[] dateParsed = dateString.split("-");
 
-
-        // endpoint GET resident
-        Calendar calendar = Calendar.getInstance();
-        Date date2 = calendar.getTime();
-        String dateStr = date2.toString();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-        ZonedDateTime dateZoned = format.parse(dateStr, ZonedDateTime::from);
-        java.util.Date date = java.util.Date.from( dateZoned.toInstant() );
-
-
-        Log.d(TAG, "onCreateView: Date: " + date.toString());
+        int year =Integer.valueOf(dateParsed[0]);
+        int month =Integer.valueOf(dateParsed[1]);
+        int day =Integer.valueOf(dateParsed[2]);
 
         if(client == null) {
             client = new ResidentsApi();
         }
 
         client.setBasePath(BasePath.basePath);
-        client.residentsResidentIdGet(residentId, Helper.generateDate(2021,9, 23), new Response.Listener<GetSpecificResidentResponseBody>() {
+        client.residentsResidentIdGet(residentId, Helper.generateDate(year,month, day), new Response.Listener<GetSpecificResidentResponseBody>() {
             @Override
             public void onResponse(GetSpecificResidentResponseBody response) {
-                //Toast.makeText(ResidentDetailsActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                 Resident resident = response.getResident();
                 residentPublic = resident;
 
                 List<Therapy> therapies = response.getTherapies();
                 therapiesPublic = therapies;
-                List<TherapyPlan> therapyPlans = response.getTherapyPlans();
 
+                // TOOLBAR title
                 setTitle(resident.getName() + " " + resident.getLastName());
 
-
-                // Create an ArrayAdapter using the string array and a default spinner layout
+                // Spinner Array Adapter
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(ResidentDetailsActivity.this,
                         R.array.residents_info, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                //Setting the ArrayAdapter data on the Spinner
                 spinner.setAdapter(adapter);
 
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -219,10 +209,11 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
-
     }
 
     private void deleteResident() {
+
+        // (DELETE /residents/{residentId})
         client.residentsResidentIdDelete(residentPublic.getResidentId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -305,8 +296,6 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                 break;
         }
 
-        //bundle.putString("mobility", resident.getMobility().toString());
-        //bundle.putString("independence", resident.getIndependence().toString());
         bundle.putString("note", resident.getNote());
 
         HealthConditionResidentsFragment fragment = new HealthConditionResidentsFragment();
@@ -346,7 +335,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
     private void callIntentEditResident(Resident resident, List<Therapy> therapies) {
         Intent intent1 =  new Intent(ResidentDetailsActivity.this, EditResidentActivity.class);
 
-        //
+        // GENERAL DATA
         intent1.putExtra("id", resident.getResidentId());
         intent1.putExtra("name", resident.getName());
         intent1.putExtra("lastName", resident.getLastName());
@@ -358,14 +347,14 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         intent1.putExtra("placeOfBirth", resident.getPlaceOfBirth());
         intent1.putExtra("idCard", resident.getIdCard());
 
-        //
+        // CONTACT PERSON
         intent1.putExtra("contactName", resident.getContactName());
         intent1.putExtra("contactRelationship", resident.getContactRelationship());
         intent1.putExtra("contactNumber", resident.getContactNumber());
         intent1.putExtra("contactEmail", resident.getContactEmail());
         intent1.putExtra("contactAddress", resident.getContactAddress());
 
-        //
+        // HEALTH CONDITION
         String mobility = resident.getMobility().toString();
         String independence = resident.getIndependence().toString();
 
@@ -391,11 +380,10 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         }
         intent1.putExtra("note", resident.getNote());
 
-        //
+        // THERAPY
         ArrayList<String> therapyStringList = new ArrayList<>();
 
         if(therapies.isEmpty()){
-            List<String> emptyList = new ArrayList<>();
             therapyStringList.add("Nije dodana nijedna terapija.");
         }else{
             for(Therapy therapy : therapies){

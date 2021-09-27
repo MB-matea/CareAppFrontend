@@ -38,7 +38,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_home3_foreground);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // RESIDENT ID

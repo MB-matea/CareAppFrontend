@@ -43,7 +43,7 @@ public class UsersActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_home3_foreground);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Toast.makeText(UsersActivity.this, "u oncreate", Toast.LENGTH_SHORT).show();

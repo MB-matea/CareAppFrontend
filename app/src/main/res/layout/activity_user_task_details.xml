@@ -98,7 +98,8 @@
         android:background="@color/theme1"
         android:textColor="@color/white"
         android:text="Odrađeno"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="15dp"/>
 
 
 </LinearLayout>

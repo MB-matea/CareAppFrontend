@@ -32,8 +32,6 @@ public class ResidentsActivity extends AppCompatActivity {
 
     private static ResidentsApi client;
 
-    private static final String TAG = "ResidentsActivity";
-    //var
     private ArrayList<Integer> mRoomNumbers = new ArrayList<>();
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Boolean> mCheckBoxes = new ArrayList<>();
@@ -48,10 +46,8 @@ public class ResidentsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_home3_foreground);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Toast.makeText(ResidentsActivity.this, "u oncreate", Toast.LENGTH_SHORT).show();
 
         getResidents();
     }
@@ -70,6 +66,7 @@ public class ResidentsActivity extends AppCompatActivity {
 
         client.setBasePath(BasePath.basePath);
 
+        // (GET /residents)
         client.residentsGet(new Response.Listener<GetAllResidentsResponseBody>() {
             @Override
             public void onResponse(GetAllResidentsResponseBody response) {
@@ -89,13 +86,13 @@ public class ResidentsActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 error.printStackTrace();
             }
         });
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: initrecyclerview");
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(ResidentsActivity.this, mRoomNumbers, mNames, mCheckBoxes, mIds);
         recyclerView.setAdapter(adapter);
@@ -110,7 +107,6 @@ public class ResidentsActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -120,7 +116,6 @@ public class ResidentsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_create_resident:
-                Toast.makeText(ResidentsActivity.this, "Create resident", Toast.LENGTH_SHORT).show();
                 Intent intent2 = new Intent(ResidentsActivity.this, CreateResidentActivity.class);
                 startActivity(intent2);
                 return true;

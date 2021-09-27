@@ -12,12 +12,9 @@ import android.widget.TextView;
 
 public class ContactPersonResidentsFragment extends Fragment {
 
-    private static final String TAG = "Fragment";
     private View layout;
 
     TextView txtContactName, txtContactRelationship, txtContactNumber, txtContactEmail, txtContactAddress;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

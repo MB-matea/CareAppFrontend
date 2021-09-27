@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18102564102564103" />
+        <entry key="app/src/main/res/drawable/ic_home_background.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/ic_icon_background.xml" value="0.24351851851851852" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.18102564102564103" />
+        <entry key="app/src/main/res/drawable/ic_list2_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_list_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_lock_background.xml" value="0.18102564102564103" />
         <entry key="app/src/main/res/drawable/ic_plus_background.xml" value="0.18102564102564103" />
         <entry key="app/src/main/res/layout/activity_add_resident.xml" value="0.16770833333333332" />
@@ -17,7 +20,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_resident_details.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/activity_resident_tasks.xml" value="0.16770833333333332" />
-        <entry key="app/src/main/res/layout/activity_residents.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/activity_residents.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.27309782608695654" />
         <entry key="app/src/main/res/layout/activity_tasks.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/activity_user_details.xml" value="0.27309782608695654" />
@@ -38,10 +41,21 @@
         <entry key="app/src/main/res/layout/popup_window.xml" value="0.27309782608695654" />
         <entry key="app/src/main/res/layout/toolbar_main.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/menu/menu_details.xml" value="0.335" />
+        <entry key="app/src/main/res/menu/menu_empty.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.13148148148148148" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_user_details.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/menu_user_tasks.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_home.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_icon.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_icon_round.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_list.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_list2.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_list2_round.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_list_round.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_lock.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_plus.xml" value="0.18102564102564103" />
       </map>
     </option>

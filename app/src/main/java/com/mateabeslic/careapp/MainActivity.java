@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // JSON DESERIALIZER
         JsonUtil.gsonBuilder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
             public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
                 String[] chunks = json.getAsJsonPrimitive().getAsString().split("-");
                 return Helper.generateDate(Integer.parseInt(chunks[0]), Integer.parseInt(chunks[1]), Integer.parseInt(chunks[2]));
             }
         });
-
 
         if(client == null) {
             client = new LogInApi();
@@ -60,19 +60,22 @@ public class MainActivity extends AppCompatActivity {
                 String password = edtPassword.getText().toString();
 
                 client.setBasePath(BasePath.basePath);
+
                 LoginRequestBody requestBody = new LoginRequestBody();
                 requestBody.setUserName(username);
                 requestBody.setPassword(password);
 
+
+                // (POST /login)
                 client.loginPost(requestBody, new Response.Listener<LoginResponseBody>() {
                     @Override
                     public void onResponse(LoginResponseBody response) {
-                        //Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                         User user = new User();
                         user.setName(response.getName());
                         user.setLastName(response.getLastName());
                         user.setUserId(response.getUserId());
                         user.setIsAdmin(response.getIsAdmin());
+
                         Toast.makeText(MainActivity.this, "Uspješno ste se prijavili!", Toast.LENGTH_LONG).show();
 
                         if(user.getIsAdmin().equals(true)){

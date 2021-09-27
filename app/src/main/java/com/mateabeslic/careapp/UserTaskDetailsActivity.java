@@ -54,7 +54,7 @@ public class UserTaskDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_home3_foreground);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // RESIDENT ID
@@ -98,7 +98,7 @@ public class UserTaskDetailsActivity extends AppCompatActivity {
 
 
     private void showResidentDetails() {
-        setTitle(resident.getName() + " " + resident.getLastName());
+        setTitle(resident.getName() + " " + resident.getLastName() + " - " + resident.getRoom());
         txtName = findViewById(R.id.txt_name);
         txtLastName = findViewById(R.id.txt_last_name);
         txtRoom = findViewById(R.id.txt_room);
@@ -179,8 +179,6 @@ public class UserTaskDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 
