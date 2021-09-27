@@ -63,7 +63,7 @@ public class UsersActivity extends AppCompatActivity {
             client = new UsersApi();
         }
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
         client.usersGet(new Response.Listener<GetAllUsersResponseBody>() {
             @Override

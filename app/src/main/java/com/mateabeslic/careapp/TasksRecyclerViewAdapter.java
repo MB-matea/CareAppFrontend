@@ -1,36 +1,27 @@
 package com.mateabeslic.careapp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.android.material.transition.Hold;
-import com.mateabeslic.careapp.api.client.ResidentsApi;
 import com.mateabeslic.careapp.api.client.TasksApi;
-import com.mateabeslic.careapp.api.model.Task;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecyclerViewAdapter.ViewHolder> {
-    private static final String TAG = "TasksRecyclerViewAdapter";
 
     private TasksApi client;
 
@@ -59,28 +50,20 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called");
-
         holder.txtDate.setText(Helper.generateString(mDates.get(position)));
         holder.txtUser.setText(mUsers.get(position));
         if(mCheckBoxes.get(position).booleanValue()){
             holder.txtDone.setText("Da");
         } else {
             holder.txtDone.setText("Ne");
-            //holder.txtUser.setTextColor(Color.RED);
-            //holder.txtDate.setTextColor(0xFF00B3D6);
         }
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on" + mUsers.get(holder.getAdapterPosition()));
                 Toast.makeText(mContext, mUsers.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
 
                 showDeleteDialog(mIds.get(holder.getAdapterPosition()));
-                //Intent intent = new Intent(mContext, ResidentDetailsActivity.class);
-                //intent.putExtra("residentId", mIds.get(holder.getAdapterPosition()));
-                //mContext.startActivity(intent);
             }
         });
     }
@@ -96,7 +79,6 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
                     public void onClick(DialogInterface dialog, int id) {
                         deleteResident(taskId);
                         dialog.cancel();
-                        //finish();
                     }
                 });
 
@@ -119,8 +101,9 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
             client = new TasksApi();
         }
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
+        // (DELETE /tasks/{taskId})
         client.tasksTaskIdDelete(taskId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -130,7 +113,9 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "GREŠKA!", Toast.LENGTH_SHORT).show();
+                if (error.networkResponse.statusCode == 404) {
+                    Toast.makeText(mContext, "Zaduženje nije pronađeno!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

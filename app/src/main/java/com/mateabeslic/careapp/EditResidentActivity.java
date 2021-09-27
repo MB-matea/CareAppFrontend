@@ -7,7 +7,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,9 +20,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.mateabeslic.careapp.api.client.ResidentsApi;
-import com.mateabeslic.careapp.api.model.CreateResidentRequestBody;
 import com.mateabeslic.careapp.api.model.Resident;
-import com.mateabeslic.careapp.api.model.ReturnId;
 import com.mateabeslic.careapp.api.model.Therapy;
 
 import java.text.SimpleDateFormat;
@@ -85,19 +82,13 @@ public class EditResidentActivity extends AppCompatActivity {
         spnIndependence = (Spinner) findViewById(R.id.spn_independence);
         spnMobility = (Spinner) findViewById(R.id.spn_mobility);
 
-
-
         Resident resident = new Resident();
 
         // INDEPENDENCE SPINNER
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterIndependence = ArrayAdapter.createFromResource(this,
                 R.array.independence_status, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapterIndependence.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spnIndependence.setAdapter(adapterIndependence);
-
 
         spnIndependence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -122,12 +113,9 @@ public class EditResidentActivity extends AppCompatActivity {
         });
 
         // MOBILITY SPINNER
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterMobility = ArrayAdapter.createFromResource(this,
                 R.array.mobility_status, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapterMobility.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spnMobility.setAdapter(adapterMobility);
 
         spnMobility.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -152,9 +140,9 @@ public class EditResidentActivity extends AppCompatActivity {
 
         // GET INTENT EXTRAS
         Bundle bundle = getIntent().getExtras();
-
         Integer residentId = Integer.valueOf(bundle.get("id").toString());
 
+        // TOOLBAR TITLE
         setTitle(bundle.get("name").toString() + " " + bundle.get("lastName").toString());
 
         edtName.setText(bundle.get("name").toString());
@@ -199,15 +187,12 @@ public class EditResidentActivity extends AppCompatActivity {
         edtRoom.setText(bundle.get("room").toString());
         edtTherapy.setText(bundle.get("therapy").toString());
 
-        //////////////
-
-
 
         if (client == null) {
             client = new ResidentsApi();
         }
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -246,16 +231,14 @@ public class EditResidentActivity extends AppCompatActivity {
                 List<Therapy> therapyList = new ArrayList<>();
                 therapyList.add(therapy);
 
-                //createResidentRequestBody.setResident(resident);
-                //createResidentRequestBody.setTherapy(therapyList);
 
-
+                // (PUT /residents/{residentId})
                 client.residentsResidentIdPut(residentId, resident, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        Toast.makeText(EditResidentActivity.this, response.toString(), Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(EditResidentActivity.this, "Promjene su spremljene!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(EditResidentActivity.this, ResidentsActivity.class);
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -263,20 +246,17 @@ public class EditResidentActivity extends AppCompatActivity {
                         if (error.networkResponse.statusCode == 400) {
                             Toast.makeText(EditResidentActivity.this, "Unesite sve podatke!", Toast.LENGTH_LONG).show();
                         }
-                        else {
-                            Toast.makeText(EditResidentActivity.this, "Greška2", Toast.LENGTH_LONG).show();
+                        else if(error.networkResponse.statusCode == 404){
+                            Toast.makeText(EditResidentActivity.this, "Korisnik ne postoji!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
-                //Intent intent = new Intent(EditResidentActivity.this, ResidentsActivity.class);
-                //startActivity(intent);
                 finish();
             }
         });
 
     }
-
 
 
     @Override

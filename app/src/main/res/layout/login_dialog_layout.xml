@@ -35,30 +35,4 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Odustani"
-            android:background="#E8E4E4"
-            android:layout_marginRight="5dp"/>
-
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Dodaj"
-            android:background="@color/theme1"
-            android:textColor="@color/white"
-            android:layout_marginLeft="5dp"/>
-    </LinearLayout>
-
 </LinearLayout>

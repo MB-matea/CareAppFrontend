@@ -3,7 +3,6 @@ package com.mateabeslic.careapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -17,21 +16,15 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.mateabeslic.careapp.api.client.LogInApi;
 import com.mateabeslic.careapp.api.client.ResidentsApi;
 import com.mateabeslic.careapp.api.model.CreateResidentRequestBody;
-import com.mateabeslic.careapp.api.model.LoginRequestBody;
-import com.mateabeslic.careapp.api.model.LoginResponseBody;
 import com.mateabeslic.careapp.api.model.Resident;
 import com.mateabeslic.careapp.api.model.ReturnId;
 import com.mateabeslic.careapp.api.model.Therapy;
-import com.mateabeslic.careapp.api.model.User;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CreateResidentActivity extends AppCompatActivity {
@@ -85,14 +78,10 @@ public class CreateResidentActivity extends AppCompatActivity {
 
         // INDEPENDENCE SPINNER
         spnIndependence = (Spinner) findViewById(R.id.spn_independence);
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterIndependence = ArrayAdapter.createFromResource(this,
                 R.array.independence_status, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapterIndependence.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spnIndependence.setAdapter(adapterIndependence);
-
 
         spnIndependence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -116,14 +105,12 @@ public class CreateResidentActivity extends AppCompatActivity {
             }
         });
 
+
         // MOBILITY SPINNER
         spnMobility = (Spinner) findViewById(R.id.spn_mobility);
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterMobility = ArrayAdapter.createFromResource(this,
                 R.array.mobility_status, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapterMobility.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spnMobility.setAdapter(adapterMobility);
 
         spnMobility.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -150,8 +137,7 @@ public class CreateResidentActivity extends AppCompatActivity {
             client = new ResidentsApi();
         }
 
-
-        client.setBasePath(String.valueOf(R.string.base_path));
+        client.setBasePath(BasePath.getBasePath());
 
         CreateResidentRequestBody createResidentRequestBody = new CreateResidentRequestBody();
 
@@ -194,11 +180,13 @@ public class CreateResidentActivity extends AppCompatActivity {
                 createResidentRequestBody.setResident(resident);
                 createResidentRequestBody.setTherapy(therapyList);
 
+                // (POST /residents)
                 client.residentsPost(createResidentRequestBody, new Response.Listener<ReturnId>() {
                     @Override
                     public void onResponse(ReturnId response) {
 
-                        Toast.makeText(CreateResidentActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateResidentActivity.this, "Kreirali ste novog korisnika doma!", Toast.LENGTH_LONG).show();
+                        finish();
 
                     }
                 }, new Response.ErrorListener() {
@@ -206,9 +194,6 @@ public class CreateResidentActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         if (error.networkResponse.statusCode == 400) {
                             Toast.makeText(CreateResidentActivity.this, "Unesite sve podatke!", Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            Toast.makeText(CreateResidentActivity.this, "Greška2", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

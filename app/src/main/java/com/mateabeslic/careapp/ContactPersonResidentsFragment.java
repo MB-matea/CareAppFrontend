@@ -22,7 +22,6 @@ public class ContactPersonResidentsFragment extends Fragment {
 
         layout = inflater.inflate(R.layout.fragment_contact_person_residents, container, false);
 
-        Integer residentId = this.getArguments().getInt("residentId");
         String contactName = this.getArguments().getString("contactName");
         String contactRelationship = this.getArguments().getString("contactRelationship");
         String contactNumber = this.getArguments().getString("contactNumber");
@@ -40,7 +39,6 @@ public class ContactPersonResidentsFragment extends Fragment {
         txtContactNumber.setText(txtContactNumber.getText() + contactNumber);
         txtContactEmail.setText(txtContactEmail.getText() + contactEmail);
         txtContactAddress.setText(txtContactAddress.getText() + contactAddress);
-
 
         return layout;
     }

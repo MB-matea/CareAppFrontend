@@ -11,14 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TherapyResidentsFragment extends Fragment {
-    private static final String TAG = "fragment";
     private View layout;
 
     ListView therapyListView;
@@ -30,9 +27,7 @@ public class TherapyResidentsFragment extends Fragment {
 
         layout = inflater.inflate(R.layout.fragment_therapy_residents, container, false);
 
-        Integer residentId = this.getArguments().getInt("residentId");
         ArrayList<String> therapyList = this.getArguments().getStringArrayList("therapylist");
-        Log.d(TAG, "onCreateView: " + therapyList.toString());
 
         therapyListView = layout.findViewById(R.id.therapy_list);
 

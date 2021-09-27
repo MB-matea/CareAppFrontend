@@ -1,18 +1,10 @@
 package com.mateabeslic.careapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +15,6 @@ import com.android.volley.VolleyError;
 import com.mateabeslic.careapp.api.client.ResidentsApi;
 import com.mateabeslic.careapp.api.model.GetAllResidentsResponseBody;
 import com.mateabeslic.careapp.api.model.GetAllResidentsResponseBodyResidents;
-import com.mateabeslic.careapp.api.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +55,7 @@ public class ResidentsActivity extends AppCompatActivity {
             client = new ResidentsApi();
         }
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
         // (GET /residents)
         client.residentsGet(new Response.Listener<GetAllResidentsResponseBody>() {

@@ -2,32 +2,20 @@ package com.mateabeslic.careapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.mateabeslic.careapp.api.client.ResidentsApi;
 import com.mateabeslic.careapp.api.client.UsersApi;
-import com.mateabeslic.careapp.api.model.CreateResidentRequestBody;
-import com.mateabeslic.careapp.api.model.Resident;
 import com.mateabeslic.careapp.api.model.ReturnId;
-import com.mateabeslic.careapp.api.model.Therapy;
 import com.mateabeslic.careapp.api.model.User;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class CreateUserActivity extends AppCompatActivity {
 
@@ -54,16 +42,12 @@ public class CreateUserActivity extends AppCompatActivity {
 
         User user = new User();
 
-        // INDEPENDENCE SPINNER
+        // IS_ADMIN SPINNER
         spnIsAdmin = (Spinner) findViewById(R.id.spn_is_admin);
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterIndependence = ArrayAdapter.createFromResource(this,
                 R.array.admin_status, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapterIndependence.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spnIsAdmin.setAdapter(adapterIndependence);
-
 
         spnIsAdmin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -90,7 +74,7 @@ public class CreateUserActivity extends AppCompatActivity {
         }
 
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,10 +87,11 @@ public class CreateUserActivity extends AppCompatActivity {
                 user.setUserName(edtUsername.getText().toString());
                 user.setPassword(edtPassword.getText().toString());
 
+                // (POST /users)
                 client.usersPost(user, new Response.Listener<ReturnId>() {
                     @Override
                     public void onResponse(ReturnId response) {
-                        Toast.makeText(CreateUserActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateUserActivity.this, "Kreirali ste novog djelatnika!", Toast.LENGTH_LONG).show();
                         finish();
                     }
                 }, new Response.ErrorListener() {
@@ -115,13 +100,9 @@ public class CreateUserActivity extends AppCompatActivity {
                         if (error.networkResponse.statusCode == 400) {
                             Toast.makeText(CreateUserActivity.this, "Unesite sve podatke!", Toast.LENGTH_LONG).show();
                         }
-                        else {
-                            Toast.makeText(CreateUserActivity.this, "Greška2", Toast.LENGTH_LONG).show();
-                        }
                     }
                 });
             }
         });
-
     }
 }

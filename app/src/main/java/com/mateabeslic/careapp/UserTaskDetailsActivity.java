@@ -70,7 +70,7 @@ public class UserTaskDetailsActivity extends AppCompatActivity {
             client = new ResidentsApi();
         }
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
         client.residentsResidentIdGet(residentId, Helper.generateDate(2021, 1, 11), new Response.Listener<GetSpecificResidentResponseBody>() {
             @Override
@@ -162,7 +162,7 @@ public class UserTaskDetailsActivity extends AppCompatActivity {
             clientTasks = new TasksApi();
         }
 
-        clientTasks.setBasePath(BasePath.basePath);
+        clientTasks.setBasePath(BasePath.getBasePath());
 
         clientTasks.tasksTaskIdPut(taskId, new Response.Listener<String>() {
             @Override

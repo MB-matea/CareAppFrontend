@@ -1,52 +1,21 @@
 package com.mateabeslic.careapp;
 
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.mateabeslic.careapp.api.client.ResidentsApi;
-import com.mateabeslic.careapp.api.model.GetAllResidentsResponseBody;
-import com.mateabeslic.careapp.api.model.GetAllResidentsResponseBodyResidents;
-import com.mateabeslic.careapp.api.model.GetSpecificResidentResponseBody;
-import com.mateabeslic.careapp.api.model.Resident;
-import com.mateabeslic.careapp.api.model.Therapy;
-import com.mateabeslic.careapp.api.model.TherapyPlan;
-
-import org.apache.http.impl.cookie.DateUtils;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class GeneralDataResidentsFragment extends Fragment {
 
-    private static final String TAG = "Fragment";
     private View layout;
 
     TextView txtName, txtLastName, txtRoom, txtOib, txtDateOfBirth, txtPlaceOfBirth,
             txtNationality, txtCitizenship, txtIdCard;
-
 
 
     @Override
@@ -55,7 +24,6 @@ public class GeneralDataResidentsFragment extends Fragment {
 
         layout = inflater.inflate(R.layout.fragment_general_data_residents, container, false);
 
-        Integer residentId = this.getArguments().getInt("residentId");
         String name = this.getArguments().getString("name");
         String lastName = this.getArguments().getString("lastName");
         String oib = this.getArguments().getString("oib");

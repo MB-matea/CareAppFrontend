@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 String username = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
 
-                client.setBasePath(BasePath.basePath);
+                client.setBasePath(BasePath.getBasePath());
 
                 LoginRequestBody requestBody = new LoginRequestBody();
                 requestBody.setUserName(username);

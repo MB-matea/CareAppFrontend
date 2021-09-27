@@ -1,6 +1,5 @@
 package com.mateabeslic.careapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private static final String TAG = "RecyclerViewAdapter";
 
     private ArrayList<Integer> mRoomNumbers;
     private ArrayList<String> mNames;
@@ -44,18 +42,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called");
-
         holder.txtRoom.setText(mRoomNumbers.get(position).toString());
         holder.txtName.setText(mNames.get(position));
-        holder.chkBox.setChecked(mCheckBoxes.get(position));
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on" + mNames.get(holder.getAdapterPosition()));
-                Toast.makeText(mContext, mNames.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(mContext, ResidentDetailsActivity.class);
                 intent.putExtra("residentId", mIds.get(holder.getAdapterPosition()));
                 mContext.startActivity(intent);
@@ -70,7 +62,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtRoom, txtName;
-        CheckBox chkBox;
         RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -78,7 +69,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             txtRoom = itemView.findViewById(R.id.txt_room);
             txtName = itemView.findViewById(R.id.txt_name);
-            chkBox = (CheckBox) itemView.findViewById(R.id.chk_box);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }

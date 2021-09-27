@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,17 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -31,15 +22,10 @@ import com.mateabeslic.careapp.api.client.ResidentsApi;
 import com.mateabeslic.careapp.api.model.GetSpecificResidentResponseBody;
 import com.mateabeslic.careapp.api.model.Resident;
 import com.mateabeslic.careapp.api.model.Therapy;
-import com.mateabeslic.careapp.api.model.TherapyPlan;
 
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ResidentDetailsActivity extends AppCompatActivity  {
 
@@ -49,9 +35,6 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
     private  static ResidentsApi client;
     public Resident residentPublic = new Resident();
     public List<Therapy> therapiesPublic = null;
-
-    GeneralDataResidentsFragment generalDataResidentsFragment;
-    ContactPersonResidentsFragment contactPersonResidentsFragment;
 
 
     @Override
@@ -66,8 +49,6 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinner = findViewById(R.id.spinner);
-
-        generalDataResidentsFragment = new GeneralDataResidentsFragment();
 
         // RESIDENT ID
         Bundle bundle = getIntent().getExtras();
@@ -88,7 +69,9 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
             client = new ResidentsApi();
         }
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
+
+        // (GET /residents/{residentId})
         client.residentsResidentIdGet(residentId, Helper.generateDate(year,month, day), new Response.Listener<GetSpecificResidentResponseBody>() {
             @Override
             public void onResponse(GetSpecificResidentResponseBody response) {
@@ -142,6 +125,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         });
 
     }
+
 
     @Override
     protected void onRestart() {

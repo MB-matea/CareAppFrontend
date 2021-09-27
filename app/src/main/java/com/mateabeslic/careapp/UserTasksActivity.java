@@ -106,7 +106,7 @@ public class UserTasksActivity extends AppCompatActivity {
 
         Log.d(TAG, "getTasks: Date:" + dateString);
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
         client.tasksUserIdGet(userId, Helper.generateDate(year, month, day), new Response.Listener<GetAllTasksForSpecificUserResponseBody>() {
             @Override

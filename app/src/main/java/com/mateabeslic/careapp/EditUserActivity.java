@@ -1,11 +1,13 @@
 package com.mateabeslic.careapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,14 +19,8 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.mateabeslic.careapp.api.client.ResidentsApi;
 import com.mateabeslic.careapp.api.client.UsersApi;
-import com.mateabeslic.careapp.api.model.Resident;
-import com.mateabeslic.careapp.api.model.Therapy;
 import com.mateabeslic.careapp.api.model.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EditUserActivity extends AppCompatActivity {
 
@@ -55,19 +51,15 @@ public class EditUserActivity extends AppCompatActivity {
         edtUsername = findViewById(R.id.txt_username);
         edtPassword = findViewById(R.id.txt_password);
 
-        spnIsAdmin = (Spinner) findViewById(R.id.spn_is_admin);
-
         User user = new User();
 
-        // INDEPENDENCE SPINNER
-// Create an ArrayAdapter using the string array and a default spinner layout
+        // IS_ADMIN SPINNER
         ArrayAdapter<CharSequence> adapterIndependence = ArrayAdapter.createFromResource(this,
                 R.array.admin_status, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapterIndependence.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spnIsAdmin.setAdapter(adapterIndependence);
 
+        spnIsAdmin = (Spinner) findViewById(R.id.spn_is_admin);
+        spnIsAdmin.setAdapter(adapterIndependence);
 
         spnIsAdmin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -91,9 +83,9 @@ public class EditUserActivity extends AppCompatActivity {
 
         // GET INTENT EXTRAS
         Bundle bundle = getIntent().getExtras();
-
         Integer userId = Integer.valueOf(bundle.get("id").toString());
 
+        // TOOLBAR TITLE
         setTitle(bundle.get("name").toString() + " " + bundle.get("lastName").toString());
 
         edtName.setText(bundle.get("name").toString());
@@ -105,6 +97,7 @@ public class EditUserActivity extends AppCompatActivity {
         edtPassword.setText(bundle.get("password").toString());
 
         String isAdmin = bundle.get("isAdmin").toString();
+        Log.d(TAG, "onCreate: ISADMIN"+ isAdmin);
         switch (isAdmin){
             case "Da":
                 spnIsAdmin.setVerticalScrollbarPosition(0);
@@ -114,15 +107,12 @@ public class EditUserActivity extends AppCompatActivity {
                 break;
         }
 
-        //////////////
-
-
 
         if (client == null) {
             client = new UsersApi();
         }
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +129,7 @@ public class EditUserActivity extends AppCompatActivity {
                 client.usersUserIdPut(userId, user, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(EditUserActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditUserActivity.this, "Promjene su spremljene!", Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -147,20 +137,17 @@ public class EditUserActivity extends AppCompatActivity {
                         if (error.networkResponse.statusCode == 400) {
                             Toast.makeText(EditUserActivity.this, "Unesite sve podatke!", Toast.LENGTH_LONG).show();
                         }
-                        else {
-                            Toast.makeText(EditUserActivity.this, "Greška2", Toast.LENGTH_LONG).show();
+                        else if (error.networkResponse.statusCode == 404) {
+                            Toast.makeText(EditUserActivity.this, "Djelatnik ne postoji!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
-                //Intent intent = new Intent(EditResidentActivity.this, ResidentsActivity.class);
-                //startActivity(intent);
                 finish();
             }
         });
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

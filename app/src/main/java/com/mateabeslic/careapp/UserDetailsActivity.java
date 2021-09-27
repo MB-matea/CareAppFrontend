@@ -14,11 +14,14 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.mateabeslic.careapp.api.client.ResidentsApi;
 import com.mateabeslic.careapp.api.client.UsersApi;
 import com.mateabeslic.careapp.api.model.GetSpecificUserResponseBody;
 import com.mateabeslic.careapp.api.model.Resident;
+import com.mateabeslic.careapp.api.model.Therapy;
 import com.mateabeslic.careapp.api.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDetailsActivity extends AppCompatActivity {
 
@@ -49,8 +52,9 @@ public class UserDetailsActivity extends AppCompatActivity {
             client = new UsersApi();
         }
 
-        client.setBasePath(BasePath.basePath);
+        client.setBasePath(BasePath.getBasePath());
 
+        // (GET /users/{userId})
         client.usersUserIdGet(userId, new Response.Listener<GetSpecificUserResponseBody>() {
             @Override
             public void onResponse(GetSpecificUserResponseBody response) {
@@ -74,7 +78,9 @@ public class UserDetailsActivity extends AppCompatActivity {
 
 
     private void showUserDetails() {
+        // TOOLBAR TITLE
         setTitle(user.getName() + " " + user.getLastName());
+
         txtName = findViewById(R.id.txt_name);
         txtLastName = findViewById(R.id.txt_last_name);
         txtEmail = findViewById(R.id.txt_email);
@@ -121,8 +127,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_edit_user:
-                //callIntentEditResident(residentPublic, therapiesPublic);
-                Toast.makeText(UserDetailsActivity.this, "Edit Resident", Toast.LENGTH_LONG).show();
+                callIntentEditUser(user);
                 return true;
             case R.id.action_delete_user:
                 showDeleteDialog();
@@ -173,5 +178,29 @@ public class UserDetailsActivity extends AppCompatActivity {
                 Toast.makeText(UserDetailsActivity.this, "GREŠKA!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void callIntentEditUser(User user) {
+        Intent intent1 =  new Intent(UserDetailsActivity.this, EditUserActivity.class);
+
+        // GENERAL DATA
+        intent1.putExtra("id", user.getUserId());
+        intent1.putExtra("name", user.getName());
+        intent1.putExtra("lastName", user.getLastName());
+        intent1.putExtra("email", user.getEmail());
+        intent1.putExtra("address", user.getAddress());
+        intent1.putExtra("number", user.getNumber());
+
+        // LOGIN DATA
+        intent1.putExtra("username", user.getUserName());
+        intent1.putExtra("password", user.getPassword());
+
+        if (user.getIsAdmin()){
+            intent1.putExtra("isAdmin", "Da");
+        } else {
+            intent1.putExtra("isAdmin", "Ne");
+        }
+
+        startActivity(intent1);
     }
 }
