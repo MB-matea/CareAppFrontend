@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CareApp">
         <activity
+            android:name=".UserTaskDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".UserTasksActivity"
+            android:exported="true" />
+        <activity
             android:name=".EditUserActivity"
             android:exported="true" />
         <activity

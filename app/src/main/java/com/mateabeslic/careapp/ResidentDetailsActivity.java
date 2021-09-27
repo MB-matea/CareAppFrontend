@@ -88,6 +88,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
         ZonedDateTime dateZoned = format.parse(dateStr, ZonedDateTime::from);
         java.util.Date date = java.util.Date.from( dateZoned.toInstant() );
 
+
         Log.d(TAG, "onCreateView: Date: " + date.toString());
 
         if(client == null) {

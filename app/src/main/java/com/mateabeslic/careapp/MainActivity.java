@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("name", user.getName());
                             intent.putExtra("lastName", user.getLastName());
                             MainActivity.this.startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, UserTasksActivity.class);
+                            intent.putExtra("userId", user.getUserId());
+                            intent.putExtra("name", user.getName());
+                            intent.putExtra("lastName", user.getLastName());
+                            MainActivity.this.startActivity(intent);
                         }
                     }
                 }, new Response.ErrorListener() {

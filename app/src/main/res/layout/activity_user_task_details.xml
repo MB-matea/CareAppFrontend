@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UserTaskDetailsActivity"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_main"
+        android:id="@+id/toolbar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Osnovni podaci"
+        android:textSize="20dp"
+        android:textColor="@color/theme1"
+        android:textAlignment="center"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Ime:   "
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/txt_last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Prezime:   "
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/txt_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Soba:   "
+        android:textSize="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zdravstveno stanje"
+        android:textSize="20dp"
+        android:textColor="@color/theme1"
+        android:textAlignment="center"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/txt_mobility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Pokretnost:   "
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/txt_independence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Samostalnost:   "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/txt_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Bilješka:   "
+        android:textSize="20dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Terapija"
+        android:textSize="20dp"
+        android:textColor="@color/theme1"
+        android:textAlignment="center"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/txt_therapy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Terapija:   "
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme1"
+        android:textColor="@color/white"
+        android:text="Odrađeno"
+        android:layout_marginTop="15dp" />
+
+
+</LinearLayout>

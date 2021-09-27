@@ -22,11 +22,6 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Bundle bundle = getIntent().getExtras();
-        //Integer userId = (Integer) bundle.get("userId");
-        //String userName = (String) bundle.get("name");
-        //ssString userLastName = (String) bundle.get("lastName");
-
         btnResidents = findViewById(R.id.btn_residents);
         btnUsers = findViewById(R.id.btn_users);
         btnLogout = findViewById(R.id.btn_logout);
