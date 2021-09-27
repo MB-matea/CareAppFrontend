@@ -100,10 +100,10 @@ public class EditUserActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ISADMIN"+ isAdmin);
         switch (isAdmin){
             case "Da":
-                spnIsAdmin.setVerticalScrollbarPosition(0);
+                spnIsAdmin.setSelection(0);
                 break;
             case "Ne":
-                spnIsAdmin.setVerticalScrollbarPosition(1);
+                spnIsAdmin.setSelection(1);
                 break;
         }
 

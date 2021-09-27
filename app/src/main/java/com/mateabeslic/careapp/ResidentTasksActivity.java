@@ -190,6 +190,8 @@ public class ResidentTasksActivity extends AppCompatActivity {
         EditText edtDate = (EditText) dialogView.findViewById(R.id.edt_date);
         edtDate.setInputType(InputType.TYPE_NULL);
 
+        showDateDialog(edtDate);
+
         edtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
