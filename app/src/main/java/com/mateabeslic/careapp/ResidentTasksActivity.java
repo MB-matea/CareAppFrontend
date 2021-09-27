@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -157,6 +160,7 @@ public class ResidentTasksActivity extends AppCompatActivity {
     private void ShowCustomDialog() {
         ArrayList<Integer> dUserIds = new ArrayList<>();
         ArrayList<String> dUserNames = new ArrayList<>();
+        ArrayList<CharSequence> dUsers = new ArrayList<>();
 
         CreateNewTaskRequestBody createNewTaskRequestBody = new CreateNewTaskRequestBody();
 
@@ -174,7 +178,7 @@ public class ResidentTasksActivity extends AppCompatActivity {
                 for (GetAllUsersResponseBodyUsers user : users) {
                     dUserIds.add(user.getUserId());
                     String name = user.getName() + " " + user.getLastName();
-                    dUserNames.add(name);
+                    dUsers.add(name);
                 }
             }
         }, new Response.ErrorListener() {
@@ -186,15 +190,15 @@ public class ResidentTasksActivity extends AppCompatActivity {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ResidentTasksActivity.this);
-        builder.setCancelable(false);
+        View dialogView = getLayoutInflater().inflate(R.layout.login_dialog_layout, null);
+        //builder.setCancelable(false);
         builder.setTitle("Novo zaduženje");
-        final View dialogView = LayoutInflater.from(ResidentTasksActivity.this).inflate(R.layout.login_dialog_layout, null);
-        builder.setView(dialogView);
-        final AlertDialog alertDialog = builder.show();
-
+        //final View dialogView = LayoutInflater.from(ResidentTasksActivity.this).inflate(R.layout.login_dialog_layout, null);
+        //builder.setView(dialogView);
+        //final AlertDialog alertDialog = builder.show();
 
         // DATE
-        EditText edtDate = dialogView.findViewById(R.id.edt_date);
+        EditText edtDate = (EditText) dialogView.findViewById(R.id.edt_date);
         edtDate.setInputType(InputType.TYPE_NULL);
 
         edtDate.setOnClickListener(new View.OnClickListener() {
@@ -205,44 +209,36 @@ public class ResidentTasksActivity extends AppCompatActivity {
         });
 
         // SPINNER
-        final Spinner spnUser = dialogView.findViewById(R.id.spn_user);
+        final Spinner spnUser = (Spinner) dialogView.findViewById(R.id.spn_user);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(dialogView.getContext(),
-                android.R.layout.simple_spinner_item, dUserNames);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(ResidentTasksActivity.this,
+                android.R.layout.simple_spinner_item, dUsers);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnUser.setAdapter(adapter);
 
-        spnUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        builder.setPositiveButton("Dodaj", new DialogInterface.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //createNewTaskRequestBody.setUserId(dUserIds.get(position));
-                userId = dUserIds.get(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        Button btnAdd = dialogView.findViewById(R.id.btn_add);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            public void onClick(DialogInterface dialog, int which) {
                 date = edtDate.getText().toString();
+                Integer position = spnUser.getSelectedItemPosition() + 1;
+                userId = dUserIds.get(position);
                 addTask();
-                alertDialog.cancel();
+                dialog.dismiss();
             }
         });
 
-        Button btnCancel = dialogView.findViewById(R.id.btn_cancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        builder.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
+
+
+
+        builder.setView(dialogView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
 
     }
 
