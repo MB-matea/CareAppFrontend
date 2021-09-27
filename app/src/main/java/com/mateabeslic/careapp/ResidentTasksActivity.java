@@ -1,5 +1,7 @@
 package com.mateabeslic.careapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -188,13 +191,25 @@ public class ResidentTasksActivity extends AppCompatActivity {
             }
         });
 
-        // SPINNER
-        final Spinner spnUser = (Spinner) dialogView.findViewById(R.id.spn_user);
-
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(ResidentTasksActivity.this,
                 android.R.layout.simple_spinner_item, dUsers);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // SPINNER
+        final Spinner spnUser = (Spinner) dialogView.findViewById(R.id.spn_user);
         spnUser.setAdapter(adapter);
+
+        spnUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "onClick: positionnaclick" + position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         // BUTTON "DODAJ"
         builder.setPositiveButton("Dodaj", new DialogInterface.OnClickListener() {
@@ -202,6 +217,7 @@ public class ResidentTasksActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 date = edtDate.getText().toString();
                 Integer position = spnUser.getSelectedItemPosition() + 1;
+                Log.d(TAG, "onClick: position" + position);
                 userId = dUserIds.get(position);
                 addTask();
                 dialog.dismiss();

@@ -366,19 +366,22 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
 
         // THERAPY
         ArrayList<String> therapyStringList = new ArrayList<>();
+        String therapyString;
 
         if(therapies.isEmpty()){
             therapyStringList.add("Nije dodana nijedna terapija.");
+            therapyString = "/";
         }else{
             for(Therapy therapy : therapies){
-                String therapyString = therapy.toString();
-                therapyStringList.add(therapyString);
+                String therapyString2 = therapy.getName();
+                therapyStringList.add(therapyString2);
             }
+            therapyString = therapyStringList.get(0);
         }
 
         intent1.putExtra("note", resident.getNote());
 
-        intent1.putStringArrayListExtra("therapy",therapyStringList);
+        intent1.putExtra("therapy",therapyString);
 
         startActivity(intent1);
     }
