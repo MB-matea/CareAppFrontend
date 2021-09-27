@@ -266,7 +266,9 @@ public class ResidentTasksActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                if (error.networkResponse.statusCode == 400) {
+                    Toast.makeText(ResidentTasksActivity.this, "Unesite sve podatke!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
