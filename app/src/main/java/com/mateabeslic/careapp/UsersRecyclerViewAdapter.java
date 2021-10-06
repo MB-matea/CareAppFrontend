@@ -39,7 +39,6 @@ public class UsersRecyclerViewAdapter extends RecyclerView.Adapter<UsersRecycler
 
     @Override
     public void onBindViewHolder(@NonNull UsersRecyclerViewAdapter.ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called");
 
         holder.txtId.setText(mIds.get(position).toString());
         holder.txtName.setText(mNames.get(position));
@@ -47,8 +46,6 @@ public class UsersRecyclerViewAdapter extends RecyclerView.Adapter<UsersRecycler
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on" + mNames.get(holder.getAdapterPosition()));
-                Toast.makeText(mContext, mNames.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, UserDetailsActivity.class);
                 intent.putExtra("userId", mIds.get(holder.getAdapterPosition()));

@@ -139,7 +139,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     private void showDeleteDialog() {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(UserDetailsActivity.this);
-        builder1.setMessage("Jeste li sigurni da želite izbrisati djelatika?");
+        builder1.setMessage("Jeste li sigurni da želite izbrisati djelatnika?");
         builder1.setCancelable(true);
 
         builder1.setPositiveButton(
@@ -148,7 +148,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         deleteUser();
                         dialog.cancel();
-                        finish();
+                        UserDetailsActivity.this.recreate();
                     }
                 });
 
@@ -169,7 +169,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         client.usersUserIdDelete(userId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(UserDetailsActivity.this, "Korisnik je izbrisan!", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserDetailsActivity.this, "Djelatnik je izbrisan!", Toast.LENGTH_LONG).show();
                 finish();
             }
         }, new Response.ErrorListener() {

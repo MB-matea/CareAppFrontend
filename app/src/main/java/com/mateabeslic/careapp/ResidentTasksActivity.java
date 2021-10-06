@@ -190,7 +190,6 @@ public class ResidentTasksActivity extends AppCompatActivity {
         EditText edtDate = (EditText) dialogView.findViewById(R.id.edt_date);
         edtDate.setInputType(InputType.TYPE_NULL);
 
-        showDateDialog(edtDate);
 
         edtDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,7 +224,6 @@ public class ResidentTasksActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 date = edtDate.getText().toString();
                 Integer position = spnUser.getSelectedItemPosition() + 1;
-                Log.d(TAG, "onClick: position" + position);
                 userId = (dUserIds.get(position-1));
                 addTask();
                 dialog.dismiss();
@@ -268,7 +266,7 @@ public class ResidentTasksActivity extends AppCompatActivity {
         client.tasksPost(createNewTaskRequestBody, new Response.Listener<ReturnId>() {
             @Override
             public void onResponse(ReturnId response) {
-                Toast.makeText(ResidentTasksActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                ResidentTasksActivity.this.recreate();
             }
         }, new Response.ErrorListener() {
             @Override

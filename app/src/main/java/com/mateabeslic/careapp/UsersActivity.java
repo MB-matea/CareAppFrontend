@@ -46,8 +46,6 @@ public class UsersActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_home3_foreground);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Toast.makeText(UsersActivity.this, "u oncreate", Toast.LENGTH_SHORT).show();
-
         getUsers();
     }
 
@@ -88,7 +86,6 @@ public class UsersActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: initrecyclerview");
         RecyclerView recyclerView = findViewById(R.id.users_recycler_view);
         UsersRecyclerViewAdapter adapter = new UsersRecyclerViewAdapter(UsersActivity.this, mIds, mNames);
         recyclerView.setAdapter(adapter);
@@ -113,7 +110,6 @@ public class UsersActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_create_resident:
-                Toast.makeText(UsersActivity.this, "Create resident", Toast.LENGTH_SHORT).show();
                 Intent intent2 = new Intent(UsersActivity.this, CreateUserActivity.class);
                 startActivity(intent2);
                 return true;

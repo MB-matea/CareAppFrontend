@@ -74,8 +74,6 @@ public class UserTasksRecyclerViewAdapter extends RecyclerView.Adapter<UserTasks
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on" + mResidents.get(holder.getAdapterPosition()));
-                Toast.makeText(mContext, mResidents.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
 
                 residentId = mIds.get(holder.getAdapterPosition());
                 Intent intent = new Intent(mContext, UserTaskDetailsActivity.class);

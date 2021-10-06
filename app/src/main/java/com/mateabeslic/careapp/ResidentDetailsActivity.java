@@ -158,10 +158,8 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                 return true;
             case R.id.action_edit_resident:
                 callIntentEditResident(residentPublic, therapiesPublic);
-                Toast.makeText(ResidentDetailsActivity.this, "Edit Resident", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.action_delete_resident:
-                //Toast.makeText(ResidentDetailsActivity.this, "Delete Resident", Toast.LENGTH_LONG).show();
                 showDeleteDialog();
                 return true;
             default:
@@ -180,7 +178,7 @@ public class ResidentDetailsActivity extends AppCompatActivity  {
                     public void onClick(DialogInterface dialog, int id) {
                         deleteResident();
                         dialog.cancel();
-                        finish();
+                        ResidentDetailsActivity.this.finish();
                     }
                 });
 

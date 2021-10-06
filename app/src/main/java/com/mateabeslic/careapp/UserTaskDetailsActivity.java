@@ -168,6 +168,8 @@ public class UserTaskDetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(UserTaskDetailsActivity.this, "Obavljeno!", Toast.LENGTH_SHORT).show();
+                btnDone.setEnabled(false);
+                btnDone.setBackgroundColor(Color.GRAY);
             }
         }, new Response.ErrorListener() {
             @Override
