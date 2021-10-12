@@ -191,10 +191,12 @@ public class ResidentTasksActivity extends AppCompatActivity {
         edtDate.setInputType(InputType.TYPE_NULL);
 
 
-        edtDate.setOnClickListener(new View.OnClickListener() {
+        edtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                showDateDialog(edtDate);
+            public void onFocusChange(View view, boolean b) {
+                if(b) {
+                    showDateDialog(edtDate);
+                }
             }
         });
 

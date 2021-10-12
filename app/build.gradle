@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 29
 
     defaultConfig {
         applicationId "com.mateabeslic.careapp"
-        minSdk 30
-        targetSdk 30
+        minSdk 29
+        targetSdk 29
         versionCode 1
         versionName "1.0"
 
@@ -56,7 +56,7 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpcore:4.4.14'
     implementation 'org.apache.httpcomponents:httpmime:4.5.13'
 
-    implementation 'com.android.support:recyclerview-v7:30'
+    implementation 'com.android.support:recyclerview-v7:29'
 }
 
 task generateApiModels(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
