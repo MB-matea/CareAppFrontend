@@ -66,6 +66,17 @@ public class CreateResidentActivity extends AppCompatActivity {
             }
         });
 
+        edtDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    showDateDialog(edtDateOfBirth);
+                    edtDateOfBirth.clearFocus();
+                    edtPlaceOfBirth.requestFocus();
+                }
+            }
+        });
+
 
         edtPlaceOfBirth = findViewById(R.id.txt_place_of_birth);
         edtIdCard = findViewById(R.id.txt_id_card);

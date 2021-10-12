@@ -46,7 +46,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Ime:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -68,7 +70,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Prezime:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 
@@ -90,7 +94,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Email:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 
@@ -112,7 +118,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Adresa:   "
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 
@@ -134,7 +142,10 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Broj:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -166,7 +177,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Korisničko ime:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 
@@ -188,7 +201,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Lozinka:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 

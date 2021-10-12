@@ -46,7 +46,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Ime:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 
@@ -68,7 +70,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Prezime:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -90,7 +94,10 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Soba:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -112,7 +119,10 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="OIB:   "
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -134,7 +144,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Datum rođenja:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -156,7 +168,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Mjesto rođenja:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -178,7 +192,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Nacionalnost:   "
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -200,7 +216,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Državljanstvo:   "
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -222,7 +240,10 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Br. osobne iskaznice:   "
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -253,8 +274,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
-                    android:hint="Ime:   "
-                    android:textSize="20dp"/>
+                    android:hint="Ime i prezime:   "
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -276,7 +299,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Odnos:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -298,7 +323,10 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Broj:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -320,7 +348,10 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Email:   "
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"/>
 
             </LinearLayout>
 
@@ -342,7 +373,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Adresa:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 
@@ -415,7 +448,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Bilješka:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -446,7 +481,9 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:hint="Terapija:   "
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 
